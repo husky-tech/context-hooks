@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useContext } from 'react';
+// import { FruitContext, fruitContext } from './index';
+import { useFruits } from './fruit-hooks';
 import './App.css';
 
-function App() {
+const App = () => {
+  // const { fruits } = useContext(FruitContext);
+  const { fruits, addFruit, removeFruit } = useFruits();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <h1>Fruits</h1>
+      <div>
+        <button onClick={() => addFruit(`Fruit ${fruits.length + 1}`)}>
+          Add
+              </button>
+      </div>
+      <ul>
+        {fruits.map((fruit, i) => (
+          <li key={i} onClick={() => removeFruit(fruit)}>
+            {fruit}
+          </li>
+        ))}
+      </ul>
+    </>
+  )
 }
 
 export default App;
